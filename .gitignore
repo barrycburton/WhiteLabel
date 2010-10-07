@@ -1,0 +1,4 @@
+WhiteLabel_Prefix.pch
+WhiteLabel.xcodeproj/*.mode1v3
+WhiteLabel.xcodeproj/*.mode2v3
+WhiteLabel.xcodeproj/*.pbxuser

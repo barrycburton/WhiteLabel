@@ -18,6 +18,7 @@
 		9799953F125D39DA00B75182 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9799953D125D39DA00B75182 /* WebViewController.m */; };
 		97999540125D39DA00B75182 /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9799953E125D39DA00B75182 /* WebViewController.xib */; };
 		9799954E125E38DE00B75182 /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = 9799954D125E38DE00B75182 /* Feed.m */; };
+		979995A7125F9DFC00B75182 /* AlertViews.m in Sources */ = {isa = PBXBuildFile; fileRef = 979995A6125F9DFC00B75182 /* AlertViews.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,8 @@
 		9799953E125D39DA00B75182 /* WebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = WebViewController.xib; path = Classes/WebViewController.xib; sourceTree = "<group>"; };
 		9799954C125E38DE00B75182 /* Feed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feed.h; sourceTree = "<group>"; };
 		9799954D125E38DE00B75182 /* Feed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feed.m; sourceTree = "<group>"; };
+		979995A5125F9DFC00B75182 /* AlertViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertViews.h; sourceTree = "<group>"; };
+		979995A6125F9DFC00B75182 /* AlertViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertViews.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				979995A5125F9DFC00B75182 /* AlertViews.h */,
+				979995A6125F9DFC00B75182 /* AlertViews.m */,
 				28C286DF0D94DF7D0034E888 /* RootViewController.h */,
 				28C286E00D94DF7D0034E888 /* RootViewController.m */,
 				1D3623240D0F684500981E51 /* WhiteLabelAppDelegate.h */,
@@ -188,6 +193,7 @@
 				28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */,
 				9799953F125D39DA00B75182 /* WebViewController.m in Sources */,
 				9799954E125E38DE00B75182 /* Feed.m in Sources */,
+				979995A7125F9DFC00B75182 /* AlertViews.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

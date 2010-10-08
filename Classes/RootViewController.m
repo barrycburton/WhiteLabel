@@ -11,7 +11,37 @@
 
 @implementation RootViewController
 
-@synthesize toolbar;
+@synthesize rootTableView, webViewController, feed;
+
+
+
+- (void)loadAddress:(NSString *)address {
+	NSLog(@"Loading address %@", address);
+	if ( !self.feed ) {
+		self.feed = [[[Feed alloc] initWithParent:self] autorelease];
+	}
+	[feed setAddress:address];
+	[feed fetchUpdatedData];
+}
+
+- (NSString *)getAddress {
+	if ( !self.feed ) {
+		self.feed = [[[Feed alloc] initWithParent:self] autorelease];
+	}
+	return [feed getAddress];
+}
+
+- (void)dataRefreshed {
+	[(UITableView *)self.view reloadData];
+	self.title = feed.contentTitle;
+}
+
+- (void)target1 {
+	
+}
+
+
+
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -19,7 +49,7 @@
 
 - (id)initWithStyle:(UITableViewStyle)style {
 	self = [super initWithStyle:style];
-
+	
 	return self;
 }
 
@@ -33,10 +63,6 @@
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)target1 {
-	
 }
 
 /*
@@ -80,21 +106,23 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return [feed countOfList];
 }
 
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [theTableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
 	// Configure the cell.
+	NSDictionary *itemAtIndex = (NSDictionary *)[feed objectInListAtIndex:indexPath.row];
+    cell.textLabel.text = [itemAtIndex objectForKey:@"Title"];
 
     return cell;
 }
@@ -144,14 +172,16 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-	/*
-	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-	 [self.navigationController pushViewController:detailViewController animated:YES];
-	 [detailViewController release];
-	 */
+	NSDictionary *itemAtIndex = (NSDictionary *)[feed objectInListAtIndex:indexPath.row];
+	NSString *title = [itemAtIndex objectForKey:@"Title"];
+	NSString *body = [itemAtIndex objectForKey:@"Body"];
+	 
+	if ( !self.webViewController ) {
+		self.webViewController = [[[WebViewController alloc] init] autorelease];
+	}
+		
+	[self.webViewController setURL:feed.feedURL andTitle:title andHTML:body];
+	[self.navigationController pushViewController:self.webViewController animated:YES];
 }
 
 
@@ -168,10 +198,14 @@
 - (void)viewDidUnload {
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     // For example: self.myOutlet = nil;
+	self.rootTableView = nil;
+	self.webViewController = nil;
 }
 
-
 - (void)dealloc {
+	self.rootTableView = nil;
+	self.webViewController = nil;
+	self.feed = nil;
     [super dealloc];
 }
 

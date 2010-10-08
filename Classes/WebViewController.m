@@ -17,9 +17,10 @@
 - (void)setURL:(NSURL *)URL andTitle:(NSString *)title andHTML:(NSString *)HTML {
 	self.webURL = URL;
 	self.webTitle = title;
-	self.webBody = HTML;
-	self.title = title;
-	[webView loadHTMLString:webBody baseURL:webURL];
+	self.webBody = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=320\" /><title>%@</title></head>\n<body>\n<h1>%@</h1>\n%@</body></html>", self.webTitle, self.webTitle, HTML];
+	if ( self.webView ) {
+		[self.webView loadHTMLString:webBody baseURL:webURL];
+	}
 }
 
 /*
@@ -32,20 +33,23 @@
 }
 */
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	if ( self.webBody ) {
+		[self.webView loadHTMLString:webBody baseURL:webURL];
+	}
 }
-*/
+
 
 
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations // anything except upside down
-    return ((interfaceOrientation == UIInterfaceOrientationPortrait 
-			 || interfaceOrientation == UIInterfaceOrientationLandscapeLeft 
-			 || interfaceOrientation == UIInterfaceOrientationLandscapeRight );
+    return ( (interfaceOrientation == UIInterfaceOrientationPortrait) 
+			 || (interfaceOrientation == UIInterfaceOrientationLandscapeLeft) 
+			 || (interfaceOrientation == UIInterfaceOrientationLandscapeRight) );
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {

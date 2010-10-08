@@ -7,25 +7,28 @@
 //
 
 #import "Feed.h"
-
+#import "AlertViews.h"
+#import "RootViewController.h"
 
 @implementation Feed
 
-@synthesize list, feedURL, contentTitle;
+@synthesize list, feedURL, contentTitle, parent;
 @synthesize receivedData, newList, newEntry, dataString;
 
-- (id)init {
+
+- (id)initWithParent:(RootViewController *)theParent {
     if (self = [super init]) {
 		self.list = [[[NSArray alloc] init] autorelease];
 		parsingEntry = NO;
+		feedURL = nil;
+		self.parent = theParent;
     }
     return self;
 }
 
-
 - (void)setAddress:(NSString*)theAddress {
 	if ( ![theAddress hasPrefix: @"http://" ] && ![theAddress hasPrefix: @"https://" ] ) {
-		theAddress = [@"http://" stringByAppendingString: siteAddress];
+		theAddress = [@"http://" stringByAppendingString:theAddress];
 	}
 	self.feedURL = [NSURL URLWithString:theAddress];
 }
@@ -33,8 +36,6 @@
 - (NSString *)getAddress {
 	return [self.feedURL absoluteString];
 }
-
-
 
 - (unsigned)countOfList {
 	return [self.list count];
@@ -59,10 +60,13 @@
 	NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:theRequest 
 																  delegate:self 
 														  startImmediately:YES];
+	
 	if (connection == nil) {
 		/* inform the user that the connection failed */
 		NSLog(@"Connection is broken.");
 		AlertWithMessage(@"Connection is broken.");
+	} else {
+		NSLog(@"Starting connection to %@", feedURL);
 	}
 }
 
@@ -83,7 +87,7 @@
 	if ([response isKindOfClass:[NSHTTPURLResponse self]]) {
 		// log the http headers
 		NSDictionary *headers = [(NSHTTPURLResponse *)response allHeaderFields];
-		NSLog([headers description]);
+		NSLog(@"%@", [headers description]);
 	}
 	
 	// decide what kind of document this is
@@ -146,16 +150,14 @@
 	
 	NSError *parseError = [parser parserError];
 	
-	NSLog([parseError description]);
+	NSLog(@"%@", [parseError description]);
 	
 	[parser release];
 	
-	this.receivedData = nil;
-	this.newList = nil;
-	this.newEntry = nil;
-	this.newTitle = nil;
-	this.newBody = nil;
-	this.dataTitle = nil;
+	self.receivedData = nil;
+	self.newList = nil;
+	self.newEntry = nil;
+	self.dataString = nil;
 	
 	if ( shouldFetchUpdate ) {
 		shouldFetchUpdate = NO;
@@ -177,12 +179,12 @@
 		probablyFeed = YES;		
 	} else if ([elementName isEqualToString:@"channel"]) {
 		// starting rss feed
-		self.dataTitle = [[[NSMutableString alloc] init] autorelease];
+		self.dataString = [[[NSMutableString alloc] init] autorelease];
 	} else if ([elementName isEqualToString:@"feed"]) {
 		// probably atom
 		probablyFeed = YES;
 		// starting atom feed title
-		self.dataTitle = [[[NSMutableString alloc] init] autorelease];
+		self.dataString = [[[NSMutableString alloc] init] autorelease];
 	} else if ( [elementName isEqualToString:@"link"]) {
 		if ( probablyPage ) {
 			if ( [[attributeDict objectForKey:@"rel"] rangeOfString: @"alt" options: NSCaseInsensitiveSearch].location != NSNotFound ) {
@@ -191,7 +193,7 @@
 					[[attributeDict objectForKey:@"type"] rangeOfString: @"atom" options: NSCaseInsensitiveSearch].location != NSNotFound ) {
 					
 					// get feed url from alt link
-					self.feedURL = [[NSURL URLWithString:[attributeDict objectForKey:@"href"] relativeToURL:[NSURL URLWithString: siteAddress]]
+					self.feedURL = [NSURL URLWithString:[attributeDict objectForKey:@"href"] relativeToURL:self.feedURL];
 					
 					// stop parsing
 					[parser abortParsing];
@@ -228,33 +230,32 @@
         elementName = qName;
     }
 	
-	if ([elementName isEqualToString:@"item"]) {
-		// add rss item to list
-		[self.newList addObject:self.newEntry];
-		parsingEntry = NO;
-	} else if ([elementName isEqualToString:@"entry"]) {
-		// add atom entry to list
+	if ( [elementName isEqualToString:@"item"]
+		|| [elementName isEqualToString:@"entry"] ) {
+		// add rss / atom item to list
 		[self.newList addObject:self.newEntry];
 		parsingEntry = NO;
     } else if ([elementName isEqualToString:@"title"]) {
         if ( parsingEntry ) {
-			// set feed title
-			self.contentTitle = self.dataString;
-		} else {
 			// entry item title end
 			[self.newEntry setObject:self.dataString forKey:@"Title"];
+		} else {
+			// set feed title
+			self.contentTitle = self.dataString;
 		}
-    } else if ([elementName isEqualToString:@"description"]) {
-        // item description end
+		self.dataString = nil;
+    } else if ( [elementName isEqualToString:@"description"]
+			   || [elementName isEqualToString:@"content"] ) {
+        // item description / entry content end
         [self.newEntry setObject:self.dataString forKey:@"Body"];
-    } else if ([elementName isEqualToString:@"content"]) {
-		// entry content end
-		[self.newEntry setObject:self.dataString forKey:@"Body"];
-	}
+		self.dataString = nil;
+    }
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
-	[self.dataString appendString:string];
+	if ( self.dataString ) {
+		[self.dataString appendString:string];
+	}
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
@@ -274,6 +275,7 @@
 		NSLog(@"Still inconclusive.");
 	}
 	
+	[parent dataRefreshed];
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {

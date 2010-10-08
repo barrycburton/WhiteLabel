@@ -7,18 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WebViewController.h"
+#import "Feed.h"
 
 @interface RootViewController : UITableViewController {
 	UITableView *tableView;
-	WebViewController	*webViewController;
+	WebViewController *webViewController;
 	Feed *feed;
 }
 
-@property (nonatomic, retain) UITableView *tableView;
+@property (nonatomic, retain) UITableView *rootTableView;
 @property (nonatomic, retain) WebViewController	*webViewController;
 @property (nonatomic, retain) Feed *feed;
 
 - (void)loadAddress:(NSString *) address;
+- (NSString *)getAddress;
+- (void)dataRefreshed;
 - (void)target1;
+
 
 @end

@@ -12,7 +12,7 @@
 
 @implementation WhiteLabelAppDelegate
 
-@synthesize window, navigationController, rootViewController, savedAddress;
+@synthesize window, navigationController, rootViewController;
 
 
 

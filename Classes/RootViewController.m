@@ -7,7 +7,7 @@
 //
 
 #import "RootViewController.h"
-
+#import "ChangeSiteViewController.h"
 
 @implementation RootViewController
 
@@ -36,8 +36,9 @@
 	self.title = feed.contentTitle;
 }
 
-- (void)target1 {
+- (void)changeSite {
 	
+	[[self navigationController] presentModalViewController:changeSiteViewController animated:YES];
 }
 
 
@@ -106,7 +107,11 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [feed countOfList];
+	if ( feed ) {
+		return [feed countOfList];
+	} else {
+		return 0;
+	}
 }
 
 

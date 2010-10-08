@@ -19,6 +19,8 @@
 		97999540125D39DA00B75182 /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9799953E125D39DA00B75182 /* WebViewController.xib */; };
 		9799954E125E38DE00B75182 /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = 9799954D125E38DE00B75182 /* Feed.m */; };
 		979995A7125F9DFC00B75182 /* AlertViews.m in Sources */ = {isa = PBXBuildFile; fileRef = 979995A6125F9DFC00B75182 /* AlertViews.m */; };
+		97999630125FC51B00B75182 /* ChangeSiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9799962E125FC51B00B75182 /* ChangeSiteViewController.m */; };
+		97999631125FC51B00B75182 /* ChangeSiteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9799962F125FC51B00B75182 /* ChangeSiteViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,9 @@
 		9799954D125E38DE00B75182 /* Feed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feed.m; sourceTree = "<group>"; };
 		979995A5125F9DFC00B75182 /* AlertViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertViews.h; sourceTree = "<group>"; };
 		979995A6125F9DFC00B75182 /* AlertViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertViews.m; sourceTree = "<group>"; };
+		9799962D125FC51B00B75182 /* ChangeSiteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeSiteViewController.h; sourceTree = "<group>"; };
+		9799962E125FC51B00B75182 /* ChangeSiteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeSiteViewController.m; sourceTree = "<group>"; };
+		9799962F125FC51B00B75182 /* ChangeSiteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ChangeSiteViewController.xib; path = Classes/ChangeSiteViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +76,8 @@
 				9799953D125D39DA00B75182 /* WebViewController.m */,
 				9799954C125E38DE00B75182 /* Feed.h */,
 				9799954D125E38DE00B75182 /* Feed.m */,
+				9799962D125FC51B00B75182 /* ChangeSiteViewController.h */,
+				9799962E125FC51B00B75182 /* ChangeSiteViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -107,6 +114,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9799962F125FC51B00B75182 /* ChangeSiteViewController.xib */,
 				9799953E125D39DA00B75182 /* WebViewController.xib */,
 				28F335F01007B36200424DE2 /* RootViewController.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
@@ -178,6 +186,7 @@
 				28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */,
 				28F335F11007B36200424DE2 /* RootViewController.xib in Resources */,
 				97999540125D39DA00B75182 /* WebViewController.xib in Resources */,
+				97999631125FC51B00B75182 /* ChangeSiteViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +203,7 @@
 				9799953F125D39DA00B75182 /* WebViewController.m in Sources */,
 				9799954E125E38DE00B75182 /* Feed.m in Sources */,
 				979995A7125F9DFC00B75182 /* AlertViews.m in Sources */,
+				97999630125FC51B00B75182 /* ChangeSiteViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

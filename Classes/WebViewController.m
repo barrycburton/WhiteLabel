@@ -3,7 +3,7 @@
 //  WhiteLabel
 //
 //  Created by Barry Burton on 10/6/10.
-//  Copyright 2010 Gravity Mobile. All rights reserved.
+//  Copyright 2010 Fonetik. All rights reserved.
 //
 
 #import "WebViewController.h"
@@ -37,8 +37,6 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
-	self.title = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
 	
 	if ( self.webBody ) {
 		[self.webView loadHTMLString:webBody baseURL:webURL];

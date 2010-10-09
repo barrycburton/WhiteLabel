@@ -3,7 +3,7 @@
 //  White Label
 //
 //  Created by Barry Burton on 9/19/10.
-//  Copyright Gravity Mobile 2010. All rights reserved.
+//  Copyright Fonetik 2010. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -22,8 +22,8 @@
 
 - (void)loadAddress:(NSString *) address;
 - (NSString *)getAddress;
-- (void)dataRefreshed;
-- (void)target1;
-
+- (void)dataWasRefreshed;
+- (IBAction)changeSite;
+- (IBAction)refreshData;
 
 @end

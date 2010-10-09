@@ -3,7 +3,7 @@
 //  White Label
 //
 //  Created by Barry Burton on 9/19/10.
-//  Copyright Gravity Mobile 2010. All rights reserved.
+//  Copyright Fonetik 2010. All rights reserved.
 //
 
 #import "WhiteLabelAppDelegate.h"
@@ -58,6 +58,7 @@
      */
 	NSString *savedAddress = [rootViewController getAddress];
 	[[NSUserDefaults standardUserDefaults] setObject:savedAddress forKey:@"savedAddress"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 

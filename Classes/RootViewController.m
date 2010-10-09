@@ -3,7 +3,7 @@
 //  White Label
 //
 //  Created by Barry Burton on 9/19/10.
-//  Copyright Gravity Mobile 2010. All rights reserved.
+//  Copyright Fonetik 2010. All rights reserved.
 //
 
 #import "RootViewController.h"
@@ -17,31 +17,38 @@
 
 - (void)loadAddress:(NSString *)address {
 	NSLog(@"Loading address %@", address);
-	if ( !self.feed ) {
-		self.feed = [[[Feed alloc] initWithParent:self] autorelease];
-	}
-	[feed setAddress:address];
-	[feed fetchUpdatedData];
+	[self.feed setAddress:address];
+	[self.feed fetchUpdatedData];
+	[[NSUserDefaults standardUserDefaults] setObject:address forKey:@"savedAddress"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (NSString *)getAddress {
-	if ( !self.feed ) {
-		self.feed = [[[Feed alloc] initWithParent:self] autorelease];
-	}
-	return [feed getAddress];
+	return [self.feed getAddress];
 }
 
-- (void)dataRefreshed {
+- (void)dataWasRefreshed {
 	[(UITableView *)self.view reloadData];
-	self.title = feed.contentTitle;
+	self.title = self.feed.contentTitle;
 }
 
-- (void)changeSite {
-	
-	[[self navigationController] presentModalViewController:changeSiteViewController animated:YES];
+- (IBAction)changeSite {
+	ChangeSiteViewController *changeSiteVC = [[[ChangeSiteViewController alloc] init] autorelease];
+	changeSiteVC.parent = self;
+	[changeSiteVC setText:[self getAddress]];
+	[self.navigationController presentModalViewController:changeSiteVC animated:YES];
 }
 
+- (IBAction)refreshData {
+	[self.feed fetchUpdatedData];
+}
 
+- (Feed *)feed {
+	if ( !feed ) {
+		feed = [[Feed alloc] initWithParent:self];
+	}
+	return feed;
+}
 
 
 #pragma mark -
@@ -58,9 +65,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.toolbarItems = [NSArray arrayWithObjects:
-						 [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(target1)], nil];
-											
+	
+	// Uncomment the following line to set the navigation bar title to the app name for this view controller.
+	// self.title = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
+	
+	// Uncomment the following line to display a Cancel button in the  toolbar for this view controller.
+	// self.toolbarItems = [NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(target1)], nil];
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;

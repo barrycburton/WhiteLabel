@@ -3,7 +3,7 @@
 //  WhiteLabel
 //
 //  Created by Barry Burton on 10/8/10.
-//  Copyright 2010 Gravity Mobile. All rights reserved.
+//  Copyright 2010 Fonetik. All rights reserved.
 //
 
 #import "ChangeSiteViewController.h"
@@ -11,7 +11,7 @@
 
 @implementation ChangeSiteViewController
 
-@synthesize parent, textField;
+@synthesize parent, textField, initialText;
 
 
 /*
@@ -28,20 +28,21 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+
 	self.title = NSLocalizedString(@"Change Site", @"ChangeSiteKey");
+	
+	if ( self.initialText ) {
+		self.textField.text = self.initialText;
+	}
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	
+	[self.textField becomeFirstResponder];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear: animated];
-	
-	[textField becomeFirstResponder];
-	
 }
 
 /*
@@ -66,26 +67,37 @@
 	self.textField = nil;
 }
 
-- (IBAction)acceptAction:(id)sender {	
-	[parent loadAddress: textField.text];
-	[textField resignFirstResponder];
-	[self.navigationController dismissModalViewControllerAnimated:YES];
+- (void)setText:(NSString *)newText {
+	if ( self.textField ) {
+		self.textField.text = newText;
+	} else {
+		self.initialText = newText;
+	}
+}
+
+- (IBAction)acceptAction:(id)sender {
+	self.initialText = textField.text;
+	[self.parent loadAddress:textField.text];
+	[self.textField resignFirstResponder];
+	[self.parent dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)cancelAction:(id)sender {
-	[textField resignFirstResponder];
-	[self.navigationController dismissModalViewControllerAnimated:YES];
+	[self.textField resignFirstResponder];
+	[self.parent dismissModalViewControllerAnimated:YES];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
     if (theTextField == self.textField) {
-		[self dismissAction:self.textField];
+		[self acceptAction:self.textField];
     }
     return YES;
 }
 
 - (void)dealloc {
 	self.textField = nil;
+	self.parent = nil;
+	self.initialText = nil;
     [super dealloc];
 }
 

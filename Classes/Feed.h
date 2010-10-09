@@ -3,7 +3,7 @@
 //  WhiteLabel
 //
 //  Created by Barry Burton on 10/7/10.
-//  Copyright 2010 Gravity Mobile. All rights reserved.
+//  Copyright 2010 Fonetik. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

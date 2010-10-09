@@ -3,7 +3,7 @@
 //  White Label
 //
 //  Created by Barry C Burton on 5/6/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Copyright 2009 Fonetik. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

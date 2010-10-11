@@ -14,11 +14,17 @@
 	UITableView *tableView;
 	WebViewController *webViewController;
 	Feed *feed;
+	
+	UIBarButtonItem *refreshButton;
 }
 
 @property (nonatomic, retain) UITableView *rootTableView;
 @property (nonatomic, retain) WebViewController	*webViewController;
 @property (nonatomic, retain) Feed *feed;
+
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *refreshButton;
+@property (nonatomic, retain) UIView *oldView;
+
 
 - (void)loadAddress:(NSString *) address;
 - (NSString *)getAddress;

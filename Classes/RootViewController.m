@@ -12,13 +12,21 @@
 @implementation RootViewController
 
 @synthesize rootTableView, webViewController, feed;
+@synthesize refreshButton, oldView;
 
 
 
 - (void)loadAddress:(NSString *)address {
 	NSLog(@"Loading address %@", address);
+	
+	UIActivityIndicatorView *loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	[loadingIndicator startAnimating];
+	UIBarButtonItem *loadingButton = [[UIBarButtonItem alloc] initWithCustomView:loadingIndicator];
+	[self setToolbarItems:[NSArray arrayWithObjects:loadingButton, nil] animated:YES];
+
 	[self.feed setAddress:address];
 	[self.feed fetchUpdatedData];
+	
 	[[NSUserDefaults standardUserDefaults] setObject:address forKey:@"savedAddress"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -30,6 +38,9 @@
 - (void)dataWasRefreshed {
 	[(UITableView *)self.view reloadData];
 	self.title = self.feed.contentTitle;
+	[self setToolbarItems:[NSArray arrayWithObjects:self.refreshButton, nil] animated:YES];
+	
+	// TODO why is refreshButton nil on the second time through?
 }
 
 - (IBAction)changeSite {
@@ -40,6 +51,10 @@
 }
 
 - (IBAction)refreshData {
+	UIActivityIndicatorView *loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	[loadingIndicator startAnimating];
+	UIBarButtonItem *loadingButton = [[UIBarButtonItem alloc] initWithCustomView:loadingIndicator];
+	[self setToolbarItems:[NSArray arrayWithObjects:loadingButton, nil] animated:YES];
 	[self.feed fetchUpdatedData];
 }
 
@@ -65,7 +80,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
+
 	// Uncomment the following line to set the navigation bar title to the app name for this view controller.
 	// self.title = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
 	
@@ -215,12 +230,14 @@
     // For example: self.myOutlet = nil;
 	self.rootTableView = nil;
 	self.webViewController = nil;
+	self.refreshButton = nil;
 }
 
 - (void)dealloc {
 	self.rootTableView = nil;
 	self.webViewController = nil;
 	self.feed = nil;
+	self.refreshButton = nil;
     [super dealloc];
 }
 

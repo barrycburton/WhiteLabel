@@ -25,6 +25,7 @@
 	BOOL probablyFeed;
 	BOOL probablyPage;
 	BOOL shouldFetchUpdate;
+	BOOL isUpdating;
 }
 
 @property (nonatomic, retain) NSArray *list;
@@ -36,6 +37,7 @@
 @property (nonatomic, retain) NSMutableArray *newList;
 @property (nonatomic, retain) NSMutableDictionary *newEntry;
 @property (nonatomic, retain) NSMutableString *dataString;
+@property (nonatomic, assign) BOOL isUpdating;
 
 - (id)initWithParent:(RootViewController *)theParent;
 - (void)setAddress:(NSString*)theAddress;

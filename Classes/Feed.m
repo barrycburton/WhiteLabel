@@ -14,6 +14,7 @@
 
 @synthesize list, feedURL, contentTitle, parent;
 @synthesize receivedData, newList, newEntry, dataString;
+@synthesize isUpdating;
 
 
 - (id)initWithParent:(RootViewController *)theParent {
@@ -47,6 +48,8 @@
 
 
 - (void)fetchUpdatedData {
+	isUpdating = YES;
+	
     NSURLRequest *theRequest = [NSURLRequest requestWithURL:self.feedURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
 	
 	/* create the NSMutableData instance that will hold the received data */
@@ -162,6 +165,8 @@
 	if ( shouldFetchUpdate ) {
 		shouldFetchUpdate = NO;
 		[self fetchUpdatedData];
+	} else {
+		isUpdating = NO;
 	}
 }
 

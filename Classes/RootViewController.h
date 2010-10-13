@@ -16,14 +16,17 @@
 	Feed *feed;
 	
 	UIBarButtonItem *refreshButton;
+	UIBarButtonItem *loadingButton;
+	UIActivityIndicatorView *loadingIndicator;
 }
 
 @property (nonatomic, retain) UITableView *rootTableView;
 @property (nonatomic, retain) WebViewController	*webViewController;
 @property (nonatomic, retain) Feed *feed;
 
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *refreshButton;
-@property (nonatomic, retain) UIView *oldView;
+@property (nonatomic, retain) UIBarButtonItem *refreshButton;
+@property (nonatomic, retain) UIBarButtonItem *loadingButton;
+@property (nonatomic, retain) UIActivityIndicatorView *loadingIndicator;
 
 
 - (void)loadAddress:(NSString *) address;

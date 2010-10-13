@@ -12,20 +12,15 @@
 @implementation RootViewController
 
 @synthesize rootTableView, webViewController, feed;
-@synthesize refreshButton, oldView;
-
+@synthesize refreshButton, loadingButton, loadingIndicator;
 
 
 - (void)loadAddress:(NSString *)address {
 	NSLog(@"Loading address %@", address);
 	
-	UIActivityIndicatorView *loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-	[loadingIndicator startAnimating];
-	UIBarButtonItem *loadingButton = [[UIBarButtonItem alloc] initWithCustomView:loadingIndicator];
-	[self setToolbarItems:[NSArray arrayWithObjects:loadingButton, nil] animated:YES];
-
 	[self.feed setAddress:address];
-	[self.feed fetchUpdatedData];
+	
+	[self refreshData];
 	
 	[[NSUserDefaults standardUserDefaults] setObject:address forKey:@"savedAddress"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
@@ -38,9 +33,8 @@
 - (void)dataWasRefreshed {
 	[(UITableView *)self.view reloadData];
 	self.title = self.feed.contentTitle;
-	[self setToolbarItems:[NSArray arrayWithObjects:self.refreshButton, nil] animated:YES];
-	
-	// TODO why is refreshButton nil on the second time through?
+	[self setToolbarItems:[NSArray arrayWithObjects:self.refreshButton, nil] animated:NO];
+	[self.loadingIndicator stopAnimating];
 }
 
 - (IBAction)changeSite {
@@ -51,10 +45,8 @@
 }
 
 - (IBAction)refreshData {
-	UIActivityIndicatorView *loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-	[loadingIndicator startAnimating];
-	UIBarButtonItem *loadingButton = [[UIBarButtonItem alloc] initWithCustomView:loadingIndicator];
-	[self setToolbarItems:[NSArray arrayWithObjects:loadingButton, nil] animated:YES];
+	[self setToolbarItems:[NSArray arrayWithObjects:self.loadingButton, nil] animated:NO];
+	[self.loadingIndicator startAnimating];
 	[self.feed fetchUpdatedData];
 }
 
@@ -80,12 +72,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	self.refreshButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshData)] autorelease];
+	
+	self.loadingIndicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite] autorelease];
+	
+	self.loadingButton = [[[UIBarButtonItem alloc] initWithCustomView:self.loadingIndicator] autorelease];
+
+	if ( self.feed.isUpdating ) {
+		[self setToolbarItems:[NSArray arrayWithObjects:self.loadingButton, nil] animated:NO];
+		[self.loadingIndicator startAnimating];
+	} else {
+		[self setToolbarItems:[NSArray arrayWithObjects:self.refreshButton, nil] animated:NO];
+	}
+
 
 	// Uncomment the following line to set the navigation bar title to the app name for this view controller.
 	// self.title = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
-	
-	// Uncomment the following line to display a Cancel button in the  toolbar for this view controller.
-	// self.toolbarItems = [NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(target1)], nil];
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -230,14 +233,12 @@
     // For example: self.myOutlet = nil;
 	self.rootTableView = nil;
 	self.webViewController = nil;
-	self.refreshButton = nil;
 }
 
 - (void)dealloc {
 	self.rootTableView = nil;
 	self.webViewController = nil;
 	self.feed = nil;
-	self.refreshButton = nil;
     [super dealloc];
 }
 

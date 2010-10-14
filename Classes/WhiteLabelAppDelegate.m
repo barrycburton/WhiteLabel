@@ -22,19 +22,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
     // Override point for customization after application launch.
-	// load the stored preference of the user's last location from a previous launch
-	NSString *savedAddress = [[NSUserDefaults standardUserDefaults] objectForKey:@"savedAddress"];
-	
-	if ( savedAddress == nil ) {
-		savedAddress = @"http://blog.primaveracoffee.com/rss";
-	}
-	
-	[rootViewController loadAddress:savedAddress];
-	
-	NSDictionary *savedAddressDict = [NSDictionary dictionaryWithObject:savedAddress forKey:@"savedAddress"];
-	[[NSUserDefaults standardUserDefaults] registerDefaults:savedAddressDict];
-	[[NSUserDefaults standardUserDefaults] synchronize];
-    
+
     // Add the navigation controller's view to the window and display.
     [window addSubview:navigationController.view];
     [window makeKeyAndVisible];
@@ -56,9 +44,6 @@
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, called instead of applicationWillTerminate: when the user quits.
      */
-	NSString *savedAddress = [rootViewController getAddress];
-	[[NSUserDefaults standardUserDefaults] setObject:savedAddress forKey:@"savedAddress"];
-	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 

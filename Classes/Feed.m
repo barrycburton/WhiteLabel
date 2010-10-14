@@ -24,6 +24,7 @@
 		parsingEntry = NO;
 		self.feedURL = nil;
 		self.parent = theParent;
+		self.lastUpdated = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastUpdated"];
     }
     return self;
 }
@@ -270,6 +271,8 @@
 	if ( self.newList && [self.newList count] > 0 ) {
 		self.list = self.newList;
 		self.lastUpdated = [NSDate date];
+		[[NSUserDefaults standardUserDefaults] setObject:self.lastUpdated forKey:@"lastUpdated"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
 	} else if ( !shouldFetchUpdate ) {
 		NSLog(@"About to Alert No Content");
 		AlertWithMessage(@"No content found.");

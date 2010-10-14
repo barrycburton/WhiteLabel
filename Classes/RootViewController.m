@@ -39,21 +39,22 @@
 	self.lastUpdatedDate.text = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Updated", @"UpdatedKey"), dateString];
 	[self.lastUpdatedDate sizeToFit];
 	
+	UIBarButtonItem *refreshItem;
 	if ( isLoading ) {
-		[self setToolbarItems:[NSArray arrayWithObjects:self.loadingButton, self.flexibleSpaceButton, self.lastUpdatedButton, self.flexibleSpaceButton, self.fixedSpaceButton, nil] animated:NO];
+		refreshItem = self.loadingButton;
 		[self.loadingIndicator startAnimating];
 	} else {
-		[self setToolbarItems:[NSArray arrayWithObjects:self.refreshButton, self.flexibleSpaceButton, self.lastUpdatedButton, self.flexibleSpaceButton, self.fixedSpaceButton, nil] animated:NO];
+		refreshItem = self.refreshButton;
 		[self.loadingIndicator stopAnimating];
 	}
+	
+	[self setToolbarItems:[NSArray arrayWithObjects:refreshItem, self.flexibleSpaceButton, self.lastUpdatedButton, self.flexibleSpaceButton, self.fixedSpaceButton, nil] animated:NO];
 }
 
 - (void)loadAddress:(NSString *)address {
 	NSLog(@"Loading address %@", address);
 	
 	[self.feed setAddress:address];
-	
-	[self refreshData];
 	
 	[[NSUserDefaults standardUserDefaults] setObject:address forKey:@"savedAddress"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
@@ -91,10 +92,25 @@
 #pragma mark -
 #pragma mark View lifecycle
 
+- (void)initData {
+	NSString *savedAddress = [[NSUserDefaults standardUserDefaults] objectForKey:@"savedAddress"];	
+	if ( savedAddress == nil ) {
+		savedAddress = @"http://blog.primaveracoffee.com/rss";
+	}
+	[self loadAddress:savedAddress];
+}
 
 - (id)initWithStyle:(UITableViewStyle)style {
-	self = [super initWithStyle:style];
-	
+	if ( self = [super initWithStyle:style] ) {
+		[self initData];
+	}
+	return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aCoder {
+	if ( self = [super initWithCoder:aCoder] ) {
+		[self initData];
+	}
 	return self;
 }
 
@@ -271,6 +287,13 @@
     // For example: self.myOutlet = nil;
 	self.rootTableView = nil;
 	self.webViewController = nil;
+	self.refreshButton = nil;
+	self.flexibleSpaceButton = nil;
+	self.fixedSpaceButton = nil;
+	self.loadingButton = nil;
+	self.loadingIndicator = nil;
+	self.lastUpdatedButton = nil;
+	self.lastUpdatedDate = nil;
 }
 
 - (void)dealloc {

@@ -17,7 +17,7 @@
 - (void)setURL:(NSURL *)URL andTitle:(NSString *)title andHTML:(NSString *)HTML {
 	self.webURL = URL;
 	self.webTitle = title;
-	self.webBody = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=320\" /><title>%@</title></head>\n<body>\n<h1>%@</h1>\n%@</body></html>", self.webTitle, self.webTitle, HTML];
+	self.webBody = [NSString stringWithFormat:@"<html><head><title>%@</title></head>\n<body style=\"width: 300px;\">\n<h1>%@</h1>\n%@</body></html>", self.webTitle, self.webTitle, HTML];
 	if ( self.webView ) {
 		[self.webView loadHTMLString:webBody baseURL:webURL];
 	}
@@ -43,6 +43,10 @@
 	}
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+	[super viewDidDisappear: animated];
+	[self.webView loadHTMLString:nil baseURL:nil];
+}
 
 
 // Override to allow orientations other than the default portrait orientation.

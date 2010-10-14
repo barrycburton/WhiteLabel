@@ -24,16 +24,21 @@
 		parsingEntry = NO;
 		self.feedURL = nil;
 		self.parent = theParent;
+		[self setAddress:[[NSUserDefaults standardUserDefaults] objectForKey:@"dataURL"]];
+		self.contentTitle = [[NSUserDefaults standardUserDefaults] objectForKey:@"dataTitle"];
+		self.list = [[NSUserDefaults standardUserDefaults] objectForKey:@"dataList"];
 		self.lastUpdated = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastUpdated"];
     }
     return self;
 }
 
 - (void)setAddress:(NSString*)theAddress {
-	if ( ![theAddress hasPrefix: @"http://" ] && ![theAddress hasPrefix: @"https://" ] ) {
-		theAddress = [@"http://" stringByAppendingString:theAddress];
+	if ( theAddress ) {
+		if ( ![theAddress hasPrefix: @"http://" ] && ![theAddress hasPrefix: @"https://" ] ) {
+			theAddress = [@"http://" stringByAppendingString:theAddress];
+		}
+		self.feedURL = [NSURL URLWithString:theAddress];
 	}
-	self.feedURL = [NSURL URLWithString:theAddress];
 }
 
 - (NSString *)getAddress {
@@ -271,6 +276,10 @@
 	if ( self.newList && [self.newList count] > 0 ) {
 		self.list = self.newList;
 		self.lastUpdated = [NSDate date];
+		
+		[[NSUserDefaults standardUserDefaults] setObject:[self getAddress] forKey:@"dataURL"];
+		[[NSUserDefaults standardUserDefaults] setObject:self.contentTitle forKey:@"dataTitle"];
+		[[NSUserDefaults standardUserDefaults] setObject:self.list forKey:@"dataList"];
 		[[NSUserDefaults standardUserDefaults] setObject:self.lastUpdated forKey:@"lastUpdated"];
 		[[NSUserDefaults standardUserDefaults] synchronize];
 	} else if ( !shouldFetchUpdate ) {
@@ -303,6 +312,7 @@
 		NSLog(@"Still inconclusive.");
 	}
 	
+	// TODO if this is an error and not an abort, display popup and refresh UI
 }
 
 

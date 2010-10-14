@@ -55,9 +55,7 @@
 	NSLog(@"Loading address %@", address);
 	
 	[self.feed setAddress:address];
-	
-	[[NSUserDefaults standardUserDefaults] setObject:address forKey:@"savedAddress"];
-	[[NSUserDefaults standardUserDefaults] synchronize];
+	[self refreshData];
 }
 
 - (NSString *)getAddress {
@@ -93,11 +91,11 @@
 #pragma mark View lifecycle
 
 - (void)initData {
-	NSString *savedAddress = [[NSUserDefaults standardUserDefaults] objectForKey:@"savedAddress"];	
-	if ( savedAddress == nil ) {
-		savedAddress = @"http://blog.primaveracoffee.com/rss";
+	if ( [self.feed getAddress] ) {
+		self.title = self.feed.contentTitle;
+	} else {
+		[self loadAddress:@"http://blog.primaveracoffee.com/rss"];
 	}
-	[self loadAddress:savedAddress];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style {
@@ -189,8 +187,8 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	if ( feed ) {
-		return [feed countOfList];
+	if ( self.feed ) {
+		return [self.feed countOfList];
 	} else {
 		return 0;
 	}
@@ -208,7 +206,7 @@
     }
     
 	// Configure the cell.
-	NSDictionary *itemAtIndex = (NSDictionary *)[feed objectInListAtIndex:indexPath.row];
+	NSDictionary *itemAtIndex = (NSDictionary *)[self.feed objectInListAtIndex:indexPath.row];
     cell.textLabel.text = [itemAtIndex objectForKey:@"Title"];
 
     return cell;
@@ -259,7 +257,7 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSDictionary *itemAtIndex = (NSDictionary *)[feed objectInListAtIndex:indexPath.row];
+	NSDictionary *itemAtIndex = (NSDictionary *)[self.feed objectInListAtIndex:indexPath.row];
 	NSString *title = [itemAtIndex objectForKey:@"Title"];
 	NSString *body = [itemAtIndex objectForKey:@"Body"];
 	 
@@ -267,7 +265,7 @@
 		self.webViewController = [[[WebViewController alloc] init] autorelease];
 	}
 		
-	[self.webViewController setURL:feed.feedURL andTitle:title andHTML:body];
+	[self.webViewController setURL:self.feed.feedURL andTitle:title andHTML:body];
 	[self.navigationController pushViewController:self.webViewController animated:YES];
 }
 
@@ -297,8 +295,6 @@
 }
 
 - (void)dealloc {
-	self.rootTableView = nil;
-	self.webViewController = nil;
 	self.feed = nil;
     [super dealloc];
 }

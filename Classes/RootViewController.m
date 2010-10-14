@@ -12,8 +12,41 @@
 @implementation RootViewController
 
 @synthesize rootTableView, webViewController, feed;
-@synthesize refreshButton, loadingButton, loadingIndicator;
+@synthesize refreshButton, flexibleSpaceButton, fixedSpaceButton;
+@synthesize loadingButton, loadingIndicator, lastUpdatedButton, lastUpdatedDate;
 
+
+- (void)configureToolbar:(BOOL)isLoading {
+	NSString *dateString;
+	if ( self.feed.lastUpdated ) {
+		NSDateFormatterStyle dateStyle;
+		
+		NSCalendar *cal = [NSCalendar currentCalendar];
+		NSDateComponents *components = [cal components:(NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit) fromDate:[NSDate date]];
+		NSDate *today = [cal dateFromComponents:components];
+		components = [cal components:(NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit) fromDate:self.feed.lastUpdated];
+		NSDate *lastUpdatedDay = [cal dateFromComponents:components];
+		
+		if([today isEqualToDate:lastUpdatedDay]) {
+			dateStyle = NSDateFormatterNoStyle;
+		} else {
+			dateStyle = NSDateFormatterShortStyle;
+		}
+		dateString = [NSDateFormatter localizedStringFromDate:self.feed.lastUpdated dateStyle:dateStyle timeStyle:NSDateFormatterShortStyle];
+	} else {
+		dateString = @"-";
+	}
+	self.lastUpdatedDate.text = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Updated", @"UpdatedKey"), dateString];
+	[self.lastUpdatedDate sizeToFit];
+	
+	if ( isLoading ) {
+		[self setToolbarItems:[NSArray arrayWithObjects:self.loadingButton, self.flexibleSpaceButton, self.lastUpdatedButton, self.flexibleSpaceButton, self.fixedSpaceButton, nil] animated:NO];
+		[self.loadingIndicator startAnimating];
+	} else {
+		[self setToolbarItems:[NSArray arrayWithObjects:self.refreshButton, self.flexibleSpaceButton, self.lastUpdatedButton, self.flexibleSpaceButton, self.fixedSpaceButton, nil] animated:NO];
+		[self.loadingIndicator stopAnimating];
+	}
+}
 
 - (void)loadAddress:(NSString *)address {
 	NSLog(@"Loading address %@", address);
@@ -33,8 +66,7 @@
 - (void)dataWasRefreshed {
 	[(UITableView *)self.view reloadData];
 	self.title = self.feed.contentTitle;
-	[self setToolbarItems:[NSArray arrayWithObjects:self.refreshButton, nil] animated:NO];
-	[self.loadingIndicator stopAnimating];
+	[self configureToolbar:NO];
 }
 
 - (IBAction)changeSite {
@@ -45,8 +77,7 @@
 }
 
 - (IBAction)refreshData {
-	[self setToolbarItems:[NSArray arrayWithObjects:self.loadingButton, nil] animated:NO];
-	[self.loadingIndicator startAnimating];
+	[self configureToolbar:YES];
 	[self.feed fetchUpdatedData];
 }
 
@@ -56,7 +87,6 @@
 	}
 	return feed;
 }
-
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -76,16 +106,24 @@
 	self.refreshButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshData)] autorelease];
 	
 	self.loadingIndicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite] autorelease];
-	
+	self.loadingIndicator.frame = CGRectMake(0, 0, 19, 19);
 	self.loadingButton = [[[UIBarButtonItem alloc] initWithCustomView:self.loadingIndicator] autorelease];
+	
+	self.lastUpdatedDate = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+	self.lastUpdatedDate.numberOfLines = 1;
+	self.lastUpdatedDate.textAlignment = UITextAlignmentCenter;
+	self.lastUpdatedDate.adjustsFontSizeToFitWidth = NO;
+	self.lastUpdatedDate.font = [UIFont systemFontOfSize:12];
+	self.lastUpdatedDate.textColor = [UIColor whiteColor];
+	self.lastUpdatedDate.backgroundColor = [UIColor clearColor];
+	self.lastUpdatedButton = [[[UIBarButtonItem alloc] initWithCustomView:self.lastUpdatedDate] autorelease];
 
-	if ( self.feed.isUpdating ) {
-		[self setToolbarItems:[NSArray arrayWithObjects:self.loadingButton, nil] animated:NO];
-		[self.loadingIndicator startAnimating];
-	} else {
-		[self setToolbarItems:[NSArray arrayWithObjects:self.refreshButton, nil] animated:NO];
-	}
+	self.flexibleSpaceButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
 
+	self.fixedSpaceButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil] autorelease];
+	self.fixedSpaceButton.width = 45;
+	
+	[self configureToolbar:self.feed.isUpdating];
 
 	// Uncomment the following line to set the navigation bar title to the app name for this view controller.
 	// self.title = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];

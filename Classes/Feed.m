@@ -14,6 +14,7 @@
 
 @synthesize list, feedURL, contentTitle, parent;
 @synthesize receivedData, newList, newEntry, dataString;
+@synthesize lastUpdated;
 @synthesize isUpdating;
 
 
@@ -21,7 +22,7 @@
     if (self = [super init]) {
 		self.list = [[[NSArray alloc] init] autorelease];
 		parsingEntry = NO;
-		feedURL = nil;
+		self.feedURL = nil;
 		self.parent = theParent;
     }
     return self;
@@ -157,6 +158,8 @@
 	
 	[parser release];
 	
+	NSLog(@"Done with parsing");
+	
 	self.receivedData = nil;
 	self.newList = nil;
 	self.newEntry = nil;
@@ -266,6 +269,7 @@
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
 	if ( self.newList && [self.newList count] > 0 ) {
 		self.list = self.newList;
+		self.lastUpdated = [NSDate date];
 	} else if ( !shouldFetchUpdate ) {
 		NSLog(@"About to Alert No Content");
 		AlertWithMessage(@"No content found.");

@@ -21,6 +21,8 @@
 	NSMutableDictionary *newEntry;
 	NSMutableString *dataString;
 	
+	NSDate *lastUpdated;
+	
 	BOOL parsingEntry;
 	BOOL probablyFeed;
 	BOOL probablyPage;
@@ -37,6 +39,9 @@
 @property (nonatomic, retain) NSMutableArray *newList;
 @property (nonatomic, retain) NSMutableDictionary *newEntry;
 @property (nonatomic, retain) NSMutableString *dataString;
+
+@property (nonatomic, retain) NSDate *lastUpdated;
+
 @property (nonatomic, assign) BOOL isUpdating;
 
 - (id)initWithParent:(RootViewController *)theParent;

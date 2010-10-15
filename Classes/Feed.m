@@ -272,19 +272,22 @@
 	}
 }
 
-- (void)parserDidEndDocument:(NSXMLParser *)parser {
-	if ( self.newList && [self.newList count] > 0 ) {
-		self.list = self.newList;
-		self.lastUpdated = [NSDate date];
-		
-		[[NSUserDefaults standardUserDefaults] setObject:[self getAddress] forKey:@"dataURL"];
-		[[NSUserDefaults standardUserDefaults] setObject:self.contentTitle forKey:@"dataTitle"];
-		[[NSUserDefaults standardUserDefaults] setObject:self.list forKey:@"dataList"];
-		[[NSUserDefaults standardUserDefaults] setObject:self.lastUpdated forKey:@"lastUpdated"];
-		[[NSUserDefaults standardUserDefaults] synchronize];
-	} else if ( !shouldFetchUpdate ) {
-		NSLog(@"About to Alert No Content");
-		AlertWithMessage(@"No content found.");
+- (void)handleNewData {
+	if ( !shouldFetchUpdate ) {
+		if ( self.newList && [self.newList count] > 0 ) {
+			self.list = self.newList;
+			self.lastUpdated = [NSDate date];
+			
+			[[NSUserDefaults standardUserDefaults] setObject:[self getAddress] forKey:@"dataURL"];
+			[[NSUserDefaults standardUserDefaults] setObject:self.contentTitle forKey:@"dataTitle"];
+			[[NSUserDefaults standardUserDefaults] setObject:self.list forKey:@"dataList"];
+			[[NSUserDefaults standardUserDefaults] setObject:self.lastUpdated forKey:@"lastUpdated"];
+			[[NSUserDefaults standardUserDefaults] synchronize];
+		} else {
+			NSLog(@"About to Alert No Content");
+			AlertWithMessage(@"No content found.");
+		}
+		[parent dataWasRefreshed];
 	}
 	
 	NSLog(@"Document content indicates:");
@@ -295,24 +298,17 @@
 	} else {
 		NSLog(@"Still inconclusive.");
 	}
-	
-	[parent dataWasRefreshed];
+}
+
+
+- (void)parserDidEndDocument:(NSXMLParser *)parser {	
+	[self handleNewData];
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
 	// also called when we abort parsing
 	NSLog(@"Parsing failed / aborted.");
-	
-	NSLog(@"Document content indicates:");
-	if ( probablyFeed ) {
-		NSLog(@"Probably a Feed (RSS/Atom)");
-	} else if ( probablyPage ) {
-		NSLog(@"Probably a Web Page (HTML)");
-	} else {
-		NSLog(@"Still inconclusive.");
-	}
-	
-	// TODO if this is an error and not an abort, display popup and refresh UI
+	[self handleNewData];
 }
 
 

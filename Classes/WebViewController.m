@@ -43,6 +43,16 @@
 	}
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	[self.navigationController setToolbarHidden:YES animated:animated]; 
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	[self.navigationController setToolbarHidden:NO animated:animated]; 
+}
+
 - (void)viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear: animated];
 	[self.webView loadHTMLString:nil baseURL:nil];

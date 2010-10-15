@@ -96,6 +96,10 @@
 	} else {
 		[self loadAddress:@"http://blog.primaveracoffee.com/rss"];
 	}
+	
+	if ( !self.title ) {
+		self.title = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
+	}
 }
 
 - (id)initWithStyle:(UITableViewStyle)style {
@@ -138,9 +142,6 @@
 	self.fixedSpaceButton.width = 45;
 	
 	[self configureToolbar:self.feed.isUpdating];
-
-	// Uncomment the following line to set the navigation bar title to the app name for this view controller.
-	// self.title = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -264,7 +265,8 @@
 	if ( !self.webViewController ) {
 		self.webViewController = [[[WebViewController alloc] init] autorelease];
 	}
-		
+	
+	self.webViewController.title = self.title;
 	[self.webViewController setURL:self.feed.feedURL andTitle:title andHTML:body];
 	[self.navigationController pushViewController:self.webViewController animated:YES];
 }

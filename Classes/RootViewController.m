@@ -90,6 +90,15 @@
 #pragma mark -
 #pragma mark View lifecycle
 
+- (void)applicationNotify:(NSNotification *)appNotification {
+	// only registered for these two so it shouldn't ever not check out
+	if ( [[appNotification name] isEqualToString:UIApplicationDidBecomeActiveNotification]
+		|| [[appNotification name] isEqualToString:UIApplicationSignificantTimeChangeNotification] ) {
+		NSLog(@"TIME CHANGE EVENT! OR UNLOCK EVENT!");
+		[self configureToolbar:self.feed.isUpdating];
+	}
+}
+
 - (void)initData {
 	if ( [self.feed getAddress] ) {
 		self.title = self.feed.contentTitle;
@@ -100,6 +109,11 @@
 	if ( !self.title ) {
 		self.title = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
 	}
+	
+	// Find out when the app becomes active (screen unlocked, etc.)
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationNotify:) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
+	// Find out when there is a significant time change (mostly we just care about midnight)
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationNotify:) name:UIApplicationSignificantTimeChangeNotification object:[UIApplication sharedApplication]];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style {
@@ -140,18 +154,17 @@
 
 	self.fixedSpaceButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil] autorelease];
 	self.fixedSpaceButton.width = 45;
-	
-	[self configureToolbar:self.feed.isUpdating];
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-/*
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+	[self configureToolbar:self.feed.isUpdating];
 }
-*/
+
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -297,6 +310,8 @@
 }
 
 - (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[self viewDidUnload];
 	self.feed = nil;
     [super dealloc];
 }

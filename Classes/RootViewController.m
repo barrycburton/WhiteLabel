@@ -94,7 +94,7 @@
 	// only registered for these two so it shouldn't ever not check out
 	if ( [[appNotification name] isEqualToString:UIApplicationDidBecomeActiveNotification]
 		|| [[appNotification name] isEqualToString:UIApplicationSignificantTimeChangeNotification] ) {
-		NSLog(@"TIME CHANGE EVENT! OR UNLOCK EVENT!");
+		NSLog(@"Application became Active or Encountered Time Event");
 		[self configureToolbar:self.feed.isUpdating];
 	}
 }

@@ -6,9 +6,10 @@
 //  Copyright 2010 Fonetik. All rights reserved.
 //
 
-#import "Feed.h"
-#import "AlertViews.h"
 #import "RootViewController.h"
+#import "Feed.h"
+#import "NetworkActivity.h"
+#import "AlertViews.h"
 
 @implementation Feed
 
@@ -57,6 +58,12 @@
 - (void)fetchUpdatedData {
 	isUpdating = YES;
 	
+	if ( shouldFetchUpdate ) {
+		shouldFetchUpdate = NO;
+	} else {
+		[[NetworkActivity sharedNetworkActivity] operationStarted];
+	}
+	
     NSURLRequest *theRequest = [NSURLRequest requestWithURL:self.feedURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
 	
 	/* create the NSMutableData instance that will hold the received data */
@@ -75,6 +82,8 @@
 		/* inform the user that the connection failed */
 		NSLog(@"Connection is broken.");
 		AlertWithMessage(@"Connection is broken.");
+		isUpdating = NO;
+		[[NetworkActivity sharedNetworkActivity] operationEnded];
 	} else {
 		NSLog(@"Starting connection to %@", feedURL);
 	}
@@ -120,14 +129,16 @@
 		probablyFeed = YES;
 	}
 	
-	NSLog(@"MIME Type indicates:");
+
+	NSString *contentType = nil;
 	if ( probablyFeed ) {
-		NSLog(@"Probably a Feed (RSS/Atom)");
+		contentType = @"Probably a Feed (RSS/Atom)";
 	} else if ( probablyPage ) {
-		NSLog(@"Probably a Web Page (HTML)");
+		contentType = @"Probably a Web Page (HTML)";
 	} else {
-		NSLog(@"Nothing yet.");
+		contentType = @"Nothing, yet";
 	}
+	NSLog(@"MIME Type indicates: %@", contentType);
 }
 
 
@@ -141,6 +152,8 @@
 	NSLog(@"Connection started but failed later.");
 	AlertWithError(error);
 	[connection release];
+	isUpdating = NO;
+	[[NetworkActivity sharedNetworkActivity] operationEnded];
 }
 
 
@@ -159,8 +172,12 @@
 	[parser parse];
 	
 	NSError *parseError = [parser parserError];
-	
-	NSLog(@"%@", [parseError description]);
+	if ( parseError ) {
+		NSString *parseErrorDescription = [parseError description];
+		if ( parseErrorDescription ) {
+			NSLog(@"Parse Error: %@", parseErrorDescription);
+		}
+	}
 	
 	[parser release];
 	
@@ -172,10 +189,10 @@
 	self.dataString = nil;
 	
 	if ( shouldFetchUpdate ) {
-		shouldFetchUpdate = NO;
 		[self fetchUpdatedData];
 	} else {
 		isUpdating = NO;
+		[[NetworkActivity sharedNetworkActivity] operationEnded];
 	}
 }
 
@@ -290,14 +307,15 @@
 		[parent dataWasRefreshed];
 	}
 	
-	NSLog(@"Document content indicates:");
+	NSString *contentType = nil;
 	if ( probablyFeed ) {
-		NSLog(@"Probably a Feed (RSS/Atom)");
+		contentType = @"Probably a Feed (RSS/Atom)";
 	} else if ( probablyPage ) {
-		NSLog(@"Probably a Web Page (HTML)");
+		contentType = @"Probably a Web Page (HTML)";
 	} else {
-		NSLog(@"Still inconclusive.");
+		contentType = @"Still inconclusive.";
 	}
+	NSLog(@"Document content indicates: %@", contentType);
 }
 
 

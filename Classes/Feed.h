@@ -47,6 +47,7 @@
 - (id)initWithParent:(RootViewController *)theParent;
 - (void)setAddress:(NSString*)theAddress;
 - (NSString *)getAddress;
+- (NSString *)getTitle;
 - (void)fetchUpdatedData;
 - (unsigned)countOfList;
 - (id)objectInListAtIndex:(unsigned)theIndex;

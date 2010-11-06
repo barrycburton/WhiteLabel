@@ -7,13 +7,13 @@
 //
 
 #import "RootViewController.h"
-#import "ChangeSiteViewController.h"
+#import "SettingsViewController.h"
 
 @implementation RootViewController
 
 @synthesize rootTableView, webViewController, feed;
 @synthesize refreshButton, flexibleSpaceButton, fixedSpaceButton;
-@synthesize loadingButton, loadingIndicator, lastUpdatedButton, lastUpdatedDate;
+@synthesize loadingButton, loadingIndicator, lastUpdatedButton, lastUpdatedDate, settingsButton;
 
 
 - (void)configureToolbar:(BOOL)isLoading {
@@ -48,7 +48,7 @@
 		[self.loadingIndicator stopAnimating];
 	}
 	
-	[self setToolbarItems:[NSArray arrayWithObjects:refreshItem, self.flexibleSpaceButton, self.lastUpdatedButton, self.flexibleSpaceButton, self.fixedSpaceButton, nil] animated:NO];
+	[self setToolbarItems:[NSArray arrayWithObjects:refreshItem, self.fixedSpaceButton, self.flexibleSpaceButton, self.lastUpdatedButton, self.flexibleSpaceButton, self.settingsButton, nil] animated:NO];
 }
 
 - (void)loadAddress:(NSString *)address {
@@ -62,17 +62,20 @@
 	return [self.feed getAddress];
 }
 
+- (NSString *)getTitle {
+	return [self.feed getTitle];
+}
+
 - (void)dataWasRefreshed {
 	[(UITableView *)self.view reloadData];
 	self.title = self.feed.contentTitle;
 	[self configureToolbar:NO];
 }
 
-- (IBAction)changeSite {
-	ChangeSiteViewController *changeSiteVC = [[[ChangeSiteViewController alloc] init] autorelease];
-	changeSiteVC.parent = self;
-	[changeSiteVC setText:[self getAddress]];
-	[self.navigationController presentModalViewController:changeSiteVC animated:YES];
+- (IBAction)settings {
+	SettingsViewController *settingsVC = [[[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil] autorelease];
+	settingsVC.parent = self;
+	[self.navigationController presentModalViewController:settingsVC animated:YES];
 }
 
 - (IBAction)refreshData {
@@ -138,8 +141,11 @@
 	self.refreshButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshData)] autorelease];
 	
 	self.loadingIndicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite] autorelease];
-	self.loadingIndicator.frame = CGRectMake(0, 0, 19, 19);
+	self.loadingIndicator.frame = CGRectMake(0, 0, 18, 18);
 	self.loadingButton = [[[UIBarButtonItem alloc] initWithCustomView:self.loadingIndicator] autorelease];
+	
+	self.fixedSpaceButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil] autorelease];
+	self.fixedSpaceButton.width = 25;
 	
 	self.lastUpdatedDate = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
 	self.lastUpdatedDate.numberOfLines = 1;
@@ -151,12 +157,8 @@
 	self.lastUpdatedButton = [[[UIBarButtonItem alloc] initWithCustomView:self.lastUpdatedDate] autorelease];
 
 	self.flexibleSpaceButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
-
-	self.fixedSpaceButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil] autorelease];
-	self.fixedSpaceButton.width = 45;
-
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	
+	self.settingsButton = [[[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStyleBordered target:self action:@selector(settings)] autorelease];
 }
 
 
@@ -307,6 +309,7 @@
 	self.loadingIndicator = nil;
 	self.lastUpdatedButton = nil;
 	self.lastUpdatedDate = nil;
+	self.settingsButton = nil;
 }
 
 - (void)dealloc {

@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1024</int>
-		<string key="IBDocument.SystemVersion">10F569</string>
+		<string key="IBDocument.SystemVersion">10F2056</string>
 		<string key="IBDocument.InterfaceBuilderVersion">804</string>
 		<string key="IBDocument.AppKitVersion">1038.29</string>
 		<string key="IBDocument.HIToolboxVersion">461.00</string>
@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="13"/>
+			<integer value="14"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -84,21 +84,13 @@
 				<object class="NSMutableArray" key="IBUIViewControllers">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBUIViewController" id="619226028">
-						<object class="NSArray" key="IBUIToolbarItems">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-						</object>
+						<reference key="IBUIToolbarItems" ref="0"/>
 						<object class="IBUINavigationItem" key="IBUINavigationItem" id="394667715">
 							<reference key="IBUINavigationBar"/>
 							<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="552775134">
 								<string key="IBUITitle">Back</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIStyle">1</int>
-							</object>
-							<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="548912776">
-								<string key="IBUITitle">Site</string>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<int key="IBUIStyle">1</int>
-								<reference key="IBUINavigationItem" ref="394667715"/>
 							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
@@ -150,14 +142,6 @@
 						<reference key="destination" ref="619226028"/>
 					</object>
 					<int key="connectionID">18</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">changeSite</string>
-						<reference key="source" ref="548912776"/>
-						<reference key="destination" ref="619226028"/>
-					</object>
-					<int key="connectionID">24</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -224,7 +208,6 @@
 						<reference key="object" ref="394667715"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="548912776"/>
 							<reference ref="552775134"/>
 						</object>
 						<reference key="parent" ref="619226028"/>
@@ -233,11 +216,6 @@
 						<int key="objectID">17</int>
 						<reference key="object" ref="927638410"/>
 						<reference key="parent" ref="701001926"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">22</int>
-						<reference key="object" ref="548912776"/>
-						<reference key="parent" ref="394667715"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">23</int>
@@ -258,7 +236,6 @@
 					<string>2.IBAttributePlaceholdersKey</string>
 					<string>2.IBEditorWindowLastContentRect</string>
 					<string>2.IBPluginDependency</string>
-					<string>22.IBPluginDependency</string>
 					<string>3.CustomClassName</string>
 					<string>3.IBPluginDependency</string>
 					<string>9.IBEditorWindowLastContentRect</string>
@@ -279,7 +256,6 @@
 						</object>
 					</object>
 					<string>{{673, 376}, {320, 480}}</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>WhiteLabelAppDelegate</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -341,17 +317,6 @@
 								<string key="name">refreshData</string>
 								<string key="candidateClassName">id</string>
 							</object>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">refreshButton</string>
-						<string key="NS.object.0">UIBarButtonItem</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">refreshButton</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">refreshButton</string>
-							<string key="candidateClassName">UIBarButtonItem</string>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

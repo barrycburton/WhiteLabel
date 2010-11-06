@@ -46,6 +46,10 @@
 	return [self.feedURL absoluteString];
 }
 
+- (NSString *)getTitle {
+	return self.contentTitle;
+}
+
 - (unsigned)countOfList {
 	return [self.list count];
 }
@@ -82,8 +86,10 @@
 		/* inform the user that the connection failed */
 		NSLog(@"Connection is broken.");
 		AlertWithMessage(@"Connection is broken.");
+		self.feedURL = [NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:@"dataURL"]];
 		isUpdating = NO;
 		[[NetworkActivity sharedNetworkActivity] operationEnded];
+		[parent dataWasRefreshed];
 	} else {
 		NSLog(@"Starting connection to %@", feedURL);
 	}
@@ -152,8 +158,10 @@
 	NSLog(@"Connection started but failed later.");
 	AlertWithError(error);
 	[connection release];
+	self.feedURL = [NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:@"dataURL"]];
 	isUpdating = NO;
 	[[NetworkActivity sharedNetworkActivity] operationEnded];
+	[parent dataWasRefreshed];
 }
 
 
@@ -182,6 +190,33 @@
 	[parser release];
 	
 	NSLog(@"Done with parsing");
+
+	if ( !shouldFetchUpdate ) {
+		if ( self.newList && [self.newList count] > 0 ) {
+			self.list = self.newList;
+			self.lastUpdated = [NSDate date];
+			
+			[[NSUserDefaults standardUserDefaults] setObject:[self getAddress] forKey:@"dataURL"];
+			[[NSUserDefaults standardUserDefaults] setObject:self.contentTitle forKey:@"dataTitle"];
+			[[NSUserDefaults standardUserDefaults] setObject:self.list forKey:@"dataList"];
+			[[NSUserDefaults standardUserDefaults] setObject:self.lastUpdated forKey:@"lastUpdated"];
+			[[NSUserDefaults standardUserDefaults] synchronize];
+		} else {
+			NSLog(@"About to Alert No Content");
+			AlertWithMessage(@"No content found.");
+			self.feedURL = [NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:@"dataURL"]];
+		}
+	}
+	
+	NSString *contentType = nil;
+	if ( probablyFeed ) {
+		contentType = @"Probably a Feed (RSS/Atom)";
+	} else if ( probablyPage ) {
+		contentType = @"Probably a Web Page (HTML)";
+	} else {
+		contentType = @"Still inconclusive.";
+	}
+	NSLog(@"Document content indicates: %@", contentType);
 	
 	self.receivedData = nil;
 	self.newList = nil;
@@ -193,6 +228,7 @@
 	} else {
 		isUpdating = NO;
 		[[NetworkActivity sharedNetworkActivity] operationEnded];
+		[parent dataWasRefreshed];
 	}
 }
 
@@ -289,44 +325,13 @@
 	}
 }
 
-- (void)handleNewData {
-	if ( !shouldFetchUpdate ) {
-		if ( self.newList && [self.newList count] > 0 ) {
-			self.list = self.newList;
-			self.lastUpdated = [NSDate date];
-			
-			[[NSUserDefaults standardUserDefaults] setObject:[self getAddress] forKey:@"dataURL"];
-			[[NSUserDefaults standardUserDefaults] setObject:self.contentTitle forKey:@"dataTitle"];
-			[[NSUserDefaults standardUserDefaults] setObject:self.list forKey:@"dataList"];
-			[[NSUserDefaults standardUserDefaults] setObject:self.lastUpdated forKey:@"lastUpdated"];
-			[[NSUserDefaults standardUserDefaults] synchronize];
-		} else {
-			NSLog(@"About to Alert No Content");
-			AlertWithMessage(@"No content found.");
-		}
-		[parent dataWasRefreshed];
-	}
-	
-	NSString *contentType = nil;
-	if ( probablyFeed ) {
-		contentType = @"Probably a Feed (RSS/Atom)";
-	} else if ( probablyPage ) {
-		contentType = @"Probably a Web Page (HTML)";
-	} else {
-		contentType = @"Still inconclusive.";
-	}
-	NSLog(@"Document content indicates: %@", contentType);
-}
-
-
 - (void)parserDidEndDocument:(NSXMLParser *)parser {	
-	[self handleNewData];
+	NSLog(@"Parsing ended");
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
 	// also called when we abort parsing
 	NSLog(@"Parsing failed / aborted.");
-	[self handleNewData];
 }
 
 

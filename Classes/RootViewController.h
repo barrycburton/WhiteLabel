@@ -19,9 +19,10 @@
 	UIBarButtonItem *loadingButton;
 	UIActivityIndicatorView *loadingIndicator;
 	UIBarButtonItem *lastUpdatedButton;
+	UIBarButtonItem *fixedSpaceButton;
 	UILabel *lastUpdatedDate;
 	UIBarButtonItem *flexibleSpaceButton;
-	UIBarButtonItem *fixedSpaceButton;
+	UIBarButtonItem *settingsButton;
 }
 
 @property (nonatomic, retain) UITableView *rootTableView;
@@ -32,15 +33,17 @@
 @property (nonatomic, retain) UIBarButtonItem *loadingButton;
 @property (nonatomic, retain) UIActivityIndicatorView *loadingIndicator;
 @property (nonatomic, retain) UIBarButtonItem *lastUpdatedButton;
+@property (nonatomic, retain) UIBarButtonItem *fixedSpaceButton;
 @property (nonatomic, retain) UILabel *lastUpdatedDate;
 @property (nonatomic, retain) UIBarButtonItem *flexibleSpaceButton;
-@property (nonatomic, retain) UIBarButtonItem *fixedSpaceButton;
+@property (nonatomic, retain) UIBarButtonItem *settingsButton;
 
 
 - (void)loadAddress:(NSString *) address;
 - (NSString *)getAddress;
+- (NSString *)getTitle;
 - (void)dataWasRefreshed;
-- (IBAction)changeSite;
+- (IBAction)settings;
 - (IBAction)refreshData;
 
 @end

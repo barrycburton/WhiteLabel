@@ -23,6 +23,33 @@
 	}
 }
 
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+
+    NSOperationQueue *downloader = [[NSOperationQueue alloc] init];
+    int count = [[self.webView stringByEvaluatingJavaScriptFromString:@"document.images.length"] intValue];
+    for ( int i = 0; i < count; i++ ) {
+        NSURL *imageURL = [NSURL URLWithString:[self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.images[%d].src", i]]];
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *fileExtension = [[NSString stringWithFormat:@"/%@", [imageURL lastPathComponent]] pathExtension];
+        NSLog(@"File extension %@", fileExtension);
+        if ( !fileExtension ) {
+            fileExtension = @"jpg";
+        }
+        NSString *playlistFile = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"img-%d.%@", i, fileExtension]];
+        
+        [downloader addOperationWithBlock:^(void) {
+            NSData* imageData = [NSData dataWithContentsOfURL:imageURL];
+            [imageData writeToFile:playlistFile atomically:NO];
+            NSLog(@"Wrote file: %@", playlistFile);
+        }];
+    }
+    
+    
+}
+
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {

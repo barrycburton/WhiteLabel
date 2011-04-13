@@ -19,10 +19,10 @@
 	self.webTitle = title;
 
     NSString *htmlString = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"template" ofType:@"html"] encoding:NSUTF8StringEncoding error:NULL];
-   
+	
     if ( htmlString ) {
         self.webBody = [NSString stringWithFormat:htmlString, self.webTitle, self.webTitle, HTML];
-    
+
         if ( self.webView ) {
             [self.webView loadHTMLString:webBody baseURL:[[NSBundle mainBundle] bundleURL]];
         }
@@ -72,7 +72,7 @@
     [super viewDidLoad];
 	
 	if ( self.webBody ) {
-		[self.webView loadHTMLString:webBody baseURL:webURL];
+		[self.webView loadHTMLString:webBody baseURL:[[NSBundle mainBundle] bundleURL]];
 	}
 }
 

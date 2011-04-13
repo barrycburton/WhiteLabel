@@ -1,16 +1,21 @@
 // style.css
 
+html {
+    margin: 0;
+    padding: 0;
+	background-color: #dbcbbe;
+}
+
 body {
 	font-size: 75%;
-    padding: 0;
     margin: 0;
+    padding: 0;
+	color: #4b362c;
+	background-color: #dbcbbe;
 }
 
 div#main {
-    margin: 0;
     padding: 5%;
-    color: #4b362c;
-	background-color: #dbcbbe;
 }
 
 h1 {

@@ -17,10 +17,16 @@
 - (void)setURL:(NSURL *)URL andTitle:(NSString *)title andHTML:(NSString *)HTML {
 	self.webURL = URL;
 	self.webTitle = title;
-	self.webBody = [NSString stringWithFormat:@"<html><head><title>%@</title></head>\n<body style=\"width: 300px;\">\n<h1>%@</h1>\n%@</body></html>", self.webTitle, self.webTitle, HTML];
-	if ( self.webView ) {
-		[self.webView loadHTMLString:webBody baseURL:webURL];
-	}
+
+    NSString *htmlString = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"template" ofType:@"html"] encoding:NSUTF8StringEncoding error:NULL];
+   
+    if ( htmlString ) {
+        self.webBody = [NSString stringWithFormat:htmlString, self.webTitle, self.webTitle, HTML];
+    
+        if ( self.webView ) {
+            [self.webView loadHTMLString:webBody baseURL:[[NSBundle mainBundle] bundleURL]];
+        }
+    }
 }
 
 

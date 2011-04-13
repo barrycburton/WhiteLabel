@@ -16,6 +16,8 @@
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
 		28F335F11007B36200424DE2 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
 		4CF41C341274EB19005C52F6 /* NetworkActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF41C331274EB19005C52F6 /* NetworkActivity.m */; };
+		97479C64135555D400A8553D /* template.html in Resources */ = {isa = PBXBuildFile; fileRef = 97479C63135555D400A8553D /* template.html */; };
+		97479C661355569D00A8553D /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 97479C651355569D00A8553D /* style.css */; };
 		9799953F125D39DA00B75182 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9799953D125D39DA00B75182 /* WebViewController.m */; };
 		97999540125D39DA00B75182 /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9799953E125D39DA00B75182 /* WebViewController.xib */; };
 		9799954E125E38DE00B75182 /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = 9799954D125E38DE00B75182 /* Feed.m */; };
@@ -40,6 +42,8 @@
 		4CF41C321274EB19005C52F6 /* NetworkActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkActivity.h; sourceTree = "<group>"; };
 		4CF41C331274EB19005C52F6 /* NetworkActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkActivity.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* WhiteLabel-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "WhiteLabel-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		97479C63135555D400A8553D /* template.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = template.html; path = Resources/template.html; sourceTree = "<group>"; };
+		97479C651355569D00A8553D /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = style.css; path = Resources/style.css; sourceTree = "<group>"; };
 		9799953C125D39DA00B75182 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		9799953D125D39DA00B75182 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		9799953E125D39DA00B75182 /* WebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 			children = (
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* WhiteLabel-Info.plist */,
+				97479C63135555D400A8553D /* template.html */,
+				97479C651355569D00A8553D /* style.css */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -216,6 +222,8 @@
 				28F335F11007B36200424DE2 /* RootViewController.xib in Resources */,
 				97999540125D39DA00B75182 /* WebViewController.xib in Resources */,
 				97999631125FC51B00B75182 /* SettingsViewController.xib in Resources */,
+				97479C64135555D400A8553D /* template.html in Resources */,
+				97479C661355569D00A8553D /* style.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

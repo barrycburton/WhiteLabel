@@ -1,0 +1,26 @@
+// style.css
+
+body {
+	color: #4b362c;
+	background-color: #dbcbbe;
+	font-size: 75%; 
+    padding: 5%;
+}
+
+h1 {
+	font: 2em "Lucida Grande", Lucida, Verdana, sans-serif;
+}
+
+div#content {
+	font: 1em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+img {
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+	font-style: italic;
+}

@@ -7,34 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D3623260D0F684500981E51 /* WhiteLabelAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* WhiteLabelAppDelegate.m */; };
-		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
-		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
-		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
-		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
-		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
-		28F335F11007B36200424DE2 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
-		4CF41C341274EB19005C52F6 /* NetworkActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF41C331274EB19005C52F6 /* NetworkActivity.m */; };
-		97479C64135555D400A8553D /* template.html in Resources */ = {isa = PBXBuildFile; fileRef = 97479C63135555D400A8553D /* template.html */; };
-		97479C661355569D00A8553D /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 97479C651355569D00A8553D /* style.css */; };
-		9799953F125D39DA00B75182 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9799953D125D39DA00B75182 /* WebViewController.m */; };
-		97999540125D39DA00B75182 /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9799953E125D39DA00B75182 /* WebViewController.xib */; };
-		9799954E125E38DE00B75182 /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = 9799954D125E38DE00B75182 /* Feed.m */; };
-		979995A7125F9DFC00B75182 /* AlertViews.m in Sources */ = {isa = PBXBuildFile; fileRef = 979995A6125F9DFC00B75182 /* AlertViews.m */; };
-		97999630125FC51B00B75182 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9799962E125FC51B00B75182 /* SettingsViewController.m */; };
-		97999631125FC51B00B75182 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9799962F125FC51B00B75182 /* SettingsViewController.xib */; };
+		97479C811356675A00A8553D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		97479C821356675A00A8553D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		97479C831356675A00A8553D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
+		97479CA41356688A00A8553D /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
+		97479CA51356688A00A8553D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9799962E125FC51B00B75182 /* SettingsViewController.m */; };
+		97479CA61356688A00A8553D /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9799953D125D39DA00B75182 /* WebViewController.m */; };
+		97479CA71356688A00A8553D /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = 9799954D125E38DE00B75182 /* Feed.m */; };
+		97479CA81356688A00A8553D /* NetworkActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF41C331274EB19005C52F6 /* NetworkActivity.m */; };
+		97479CA91356688A00A8553D /* AlertViews.m in Sources */ = {isa = PBXBuildFile; fileRef = 979995A6125F9DFC00B75182 /* AlertViews.m */; };
+		97479CAA1356688A00A8553D /* WhiteLabelAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* WhiteLabelAppDelegate.m */; };
+		97479CAB1356688A00A8553D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		97479CAC135668B300A8553D /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9799962F125FC51B00B75182 /* SettingsViewController.xib */; };
+		97479CAD135668B300A8553D /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9799953E125D39DA00B75182 /* WebViewController.xib */; };
+		97479CAE135668B300A8553D /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
+		97479CAF135668B300A8553D /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97479C791356661100A8553D /* Icon@2x.png */; };
+		97479CB0135668B300A8553D /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 97479C7513565AF200A8553D /* iTunesArtwork */; };
+		97479CB1135668B300A8553D /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 97479C6F135659BC00A8553D /* Icon.png */; };
+		97479CB2135668B300A8553D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97479C6D1356595400A8553D /* MainWindow.xib */; };
+		97479CB4135668B300A8553D /* template.html in Resources */ = {isa = PBXBuildFile; fileRef = 97479C63135555D400A8553D /* template.html */; };
+		97479CB5135668B300A8553D /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 97479C651355569D00A8553D /* style.css */; };
+		97479CB6135668B300A8553D /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97479C77135665C000A8553D /* Entitlements.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* WhiteLabelAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteLabelAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* WhiteLabelAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhiteLabelAppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* White Label.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "White Label.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AAE50D9B0CCF005BE974 /* WhiteLabel_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteLabel_Prefix.pch; sourceTree = "<group>"; };
-		28AD735F0D9D9599002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		28C286DF0D94DF7D0034E888 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		28F335F01007B36200424DE2 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
@@ -44,6 +46,22 @@
 		8D1107310486CEB800E47090 /* WhiteLabel-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "WhiteLabel-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		97479C63135555D400A8553D /* template.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = template.html; path = Resources/template.html; sourceTree = "<group>"; };
 		97479C651355569D00A8553D /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = style.css; path = Resources/style.css; sourceTree = "<group>"; };
+		97479C6D1356595400A8553D /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainWindow.xib; path = Resources/MainWindow.xib; sourceTree = "<group>"; };
+		97479C6F135659BC00A8553D /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = Resources/Icon.png; sourceTree = "<group>"; };
+		97479C7513565AF200A8553D /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		97479C77135665C000A8553D /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		97479C791356661100A8553D /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "Resources/Icon@2x.png"; sourceTree = "<group>"; };
+		97479C7F1356675A00A8553D /* WhiteLabel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhiteLabel.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		97479C861356675A00A8553D /* WhiteLabel-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WhiteLabel-Info.plist"; sourceTree = "<group>"; };
+		97479C881356675A00A8553D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		97479C8A1356675A00A8553D /* WhiteLabel-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WhiteLabel-Prefix.pch"; sourceTree = "<group>"; };
+		97479C8B1356675A00A8553D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		97479C8D1356675B00A8553D /* WhiteLabelAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WhiteLabelAppDelegate.h; sourceTree = "<group>"; };
+		97479C8E1356675B00A8553D /* WhiteLabelAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhiteLabelAppDelegate.m; sourceTree = "<group>"; };
+		97479C911356675B00A8553D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		97479C931356675B00A8553D /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		97479C941356675B00A8553D /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		97479C971356675B00A8553D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RootViewController.xib; sourceTree = "<group>"; };
 		9799953C125D39DA00B75182 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		9799953D125D39DA00B75182 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		9799953E125D39DA00B75182 /* WebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
@@ -57,13 +75,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+		97479C7C1356675A00A8553D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
-				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
-				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
+				97479C811356675A00A8553D /* UIKit.framework in Frameworks */,
+				97479C821356675A00A8553D /* Foundation.framework in Frameworks */,
+				97479C831356675A00A8553D /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,7 +103,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* White Label.app */,
+				97479C7F1356675A00A8553D /* WhiteLabel.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -96,6 +114,7 @@
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
+				97479C841356675A00A8553D /* WhiteLabel */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -114,10 +133,14 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
+				97479C791356661100A8553D /* Icon@2x.png */,
+				97479C7513565AF200A8553D /* iTunesArtwork */,
+				97479C6F135659BC00A8553D /* Icon.png */,
+				97479C6D1356595400A8553D /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* WhiteLabel-Info.plist */,
 				97479C63135555D400A8553D /* template.html */,
 				97479C651355569D00A8553D /* style.css */,
+				97479C77135665C000A8553D /* Entitlements.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -168,24 +191,49 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		97479C841356675A00A8553D /* WhiteLabel */ = {
+			isa = PBXGroup;
+			children = (
+				97479C8D1356675B00A8553D /* WhiteLabelAppDelegate.h */,
+				97479C8E1356675B00A8553D /* WhiteLabelAppDelegate.m */,
+				97479C901356675B00A8553D /* MainWindow.xib */,
+				97479C931356675B00A8553D /* RootViewController.h */,
+				97479C941356675B00A8553D /* RootViewController.m */,
+				97479C961356675B00A8553D /* RootViewController.xib */,
+				97479C851356675A00A8553D /* Supporting Files */,
+			);
+			path = WhiteLabel;
+			sourceTree = "<group>";
+		};
+		97479C851356675A00A8553D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				97479C861356675A00A8553D /* WhiteLabel-Info.plist */,
+				97479C871356675A00A8553D /* InfoPlist.strings */,
+				97479C8A1356675A00A8553D /* WhiteLabel-Prefix.pch */,
+				97479C8B1356675A00A8553D /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D6058900D05DD3D006BFB54 /* White Label */ = {
+		97479C7E1356675A00A8553D /* WhiteLabel */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "White Label" */;
+			buildConfigurationList = 97479C991356675B00A8553D /* Build configuration list for PBXNativeTarget "WhiteLabel" */;
 			buildPhases = (
-				1D60588D0D05DD3D006BFB54 /* Resources */,
-				1D60588E0D05DD3D006BFB54 /* Sources */,
-				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+				97479C7B1356675A00A8553D /* Sources */,
+				97479C7C1356675A00A8553D /* Frameworks */,
+				97479C7D1356675A00A8553D /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "White Label";
-			productName = "White Label";
-			productReference = 1D6058910D05DD3D006BFB54 /* White Label.app */;
+			name = WhiteLabel;
+			productName = WhiteLabel;
+			productReference = 97479C7F1356675A00A8553D /* WhiteLabel.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -208,74 +256,117 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1D6058900D05DD3D006BFB54 /* White Label */,
+				97479C7E1356675A00A8553D /* WhiteLabel */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+		97479C7D1356675A00A8553D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */,
-				28F335F11007B36200424DE2 /* RootViewController.xib in Resources */,
-				97999540125D39DA00B75182 /* WebViewController.xib in Resources */,
-				97999631125FC51B00B75182 /* SettingsViewController.xib in Resources */,
-				97479C64135555D400A8553D /* template.html in Resources */,
-				97479C661355569D00A8553D /* style.css in Resources */,
+				97479CAC135668B300A8553D /* SettingsViewController.xib in Resources */,
+				97479CAD135668B300A8553D /* WebViewController.xib in Resources */,
+				97479CAE135668B300A8553D /* RootViewController.xib in Resources */,
+				97479CAF135668B300A8553D /* Icon@2x.png in Resources */,
+				97479CB0135668B300A8553D /* iTunesArtwork in Resources */,
+				97479CB1135668B300A8553D /* Icon.png in Resources */,
+				97479CB2135668B300A8553D /* MainWindow.xib in Resources */,
+				97479CB4135668B300A8553D /* template.html in Resources */,
+				97479CB5135668B300A8553D /* style.css in Resources */,
+				97479CB6135668B300A8553D /* Entitlements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+		97479C7B1356675A00A8553D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
-				1D3623260D0F684500981E51 /* WhiteLabelAppDelegate.m in Sources */,
-				28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */,
-				9799953F125D39DA00B75182 /* WebViewController.m in Sources */,
-				9799954E125E38DE00B75182 /* Feed.m in Sources */,
-				979995A7125F9DFC00B75182 /* AlertViews.m in Sources */,
-				97999630125FC51B00B75182 /* SettingsViewController.m in Sources */,
-				4CF41C341274EB19005C52F6 /* NetworkActivity.m in Sources */,
+				97479CA41356688A00A8553D /* RootViewController.m in Sources */,
+				97479CA51356688A00A8553D /* SettingsViewController.m in Sources */,
+				97479CA61356688A00A8553D /* WebViewController.m in Sources */,
+				97479CA71356688A00A8553D /* Feed.m in Sources */,
+				97479CA81356688A00A8553D /* NetworkActivity.m in Sources */,
+				97479CA91356688A00A8553D /* AlertViews.m in Sources */,
+				97479CAA1356688A00A8553D /* WhiteLabelAppDelegate.m in Sources */,
+				97479CAB1356688A00A8553D /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		97479C871356675A00A8553D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				97479C881356675A00A8553D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		97479C901356675B00A8553D /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				97479C911356675B00A8553D /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		97479C961356675B00A8553D /* RootViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				97479C971356675B00A8553D /* en */,
+			);
+			name = RootViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
-		1D6058940D05DD3E006BFB54 /* Debug */ = {
+		97479C9A1356675B00A8553D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "$(inherited)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Barry Burton (Z5X59GE6B3)";
 				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = WhiteLabel_Prefix.pch;
-				INFOPLIST_FILE = "WhiteLabel-Info.plist";
+				GCC_PREFIX_HEADER = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = "$(inherited)";
+				INFOPLIST_FILE = "$(inherited)";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PRODUCT_NAME = "White Label";
-				SDKROOT = iphoneos;
+				PRODUCT_NAME = "$(inherited)";
+				PROVISIONING_PROFILE = "E6827D17-3109-403C-A0B3-0DB2CC902616";
+				WRAPPER_EXTENSION = "$(inherited)";
 			};
 			name = Debug;
 		};
-		1D6058950D05DD3E006BFB54 /* Release */ = {
+		97479C9B1356675B00A8553D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "$(inherited)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Barry Burton";
 				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = White_Label_Prefix.pch;
-				INFOPLIST_FILE = "WhiteLabel-Info.plist";
+				GCC_PREFIX_HEADER = "$(inherited)";
+				GCC_VERSION = "$(inherited)";
+				INFOPLIST_FILE = "$(inherited)";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PRODUCT_NAME = WhiteLabel;
-				SDKROOT = iphoneos;
+				PRODUCT_NAME = "$(inherited)";
+				PROVISIONING_PROFILE = "5FAF8AFF-5EF0-4899-962E-B6D252AB59B4";
 				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = "$(inherited)";
 			};
 			name = Release;
 		};
@@ -283,13 +374,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_VERSION = "$(inherited)";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "WhiteLabel-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.1;
+				PRODUCT_NAME = WhiteLabel;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -297,25 +393,30 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_VERSION = "$(inherited)";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "WhiteLabel-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.0;
+				PRODUCT_NAME = WhiteLabel;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "White Label" */ = {
+		97479C991356675B00A8553D /* Build configuration list for PBXNativeTarget "WhiteLabel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1D6058940D05DD3E006BFB54 /* Debug */,
-				1D6058950D05DD3E006BFB54 /* Release */,
+				97479C9A1356675B00A8553D /* Debug */,
+				97479C9B1356675B00A8553D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

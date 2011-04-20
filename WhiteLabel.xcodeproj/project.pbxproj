@@ -354,7 +354,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "$(inherited)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Barry Burton (Z5X59GE6B3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -367,7 +367,7 @@
 				INFOPLIST_FILE = "$(inherited)";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(inherited)";
-				PROVISIONING_PROFILE = "E6827D17-3109-403C-A0B3-0DB2CC902616";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = "$(inherited)";
 			};
 			name = Debug;
@@ -377,7 +377,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "$(inherited)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Barry Burton";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -386,7 +386,7 @@
 				INFOPLIST_FILE = "$(inherited)";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(inherited)";
-				PROVISIONING_PROFILE = "5FAF8AFF-5EF0-4899-962E-B6D252AB59B4";
+				PROVISIONING_PROFILE = "";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = "$(inherited)";
 			};

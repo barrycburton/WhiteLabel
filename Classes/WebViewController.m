@@ -23,38 +23,20 @@
     if ( htmlString ) {
         self.webBody = [NSString stringWithFormat:htmlString, self.webTitle, self.webTitle, HTML];
 
+        NSURL *baseURL = [NSURL fileURLWithPath:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] isDirectory:YES];
+        NSLog(@"Base: %@", [baseURL absoluteString]);
+        NSLog(@"Content: %@", HTML);
         if ( self.webView ) {
-            [self.webView loadHTMLString:webBody baseURL:[[NSBundle mainBundle] bundleURL]];
+            [self.webView loadHTMLString:webBody baseURL:baseURL];
         }
     }
 }
 
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-
-    NSOperationQueue *downloader = [[NSOperationQueue alloc] init];
-    int count = [[self.webView stringByEvaluatingJavaScriptFromString:@"document.images.length"] intValue];
-    for ( int i = 0; i < count; i++ ) {
-        NSURL *imageURL = [NSURL URLWithString:[self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.images[%d].src", i]]];
-        
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
-        NSString *fileExtension = [[NSString stringWithFormat:@"/%@", [imageURL lastPathComponent]] pathExtension];
-        NSLog(@"File extension %@", fileExtension);
-        if ( !fileExtension ) {
-            fileExtension = @"jpg";
-        }
-        NSString *playlistFile = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"img-%d.%@", i, fileExtension]];
-        
-        [downloader addOperationWithBlock:^(void) {
-            NSData* imageData = [NSData dataWithContentsOfURL:imageURL];
-            [imageData writeToFile:playlistFile atomically:NO];
-            NSLog(@"Wrote file: %@", playlistFile);
-        }];
-    }
-    
-    
+    // TODO start with view covered and reveal it here
 }
+
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -72,13 +54,14 @@
     [super viewDidLoad];
 	
 	if ( self.webBody ) {
-		[self.webView loadHTMLString:webBody baseURL:[[NSBundle mainBundle] bundleURL]];
+        NSURL *baseURL = [NSURL fileURLWithPath:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] isDirectory:YES];
+		[self.webView loadHTMLString:webBody baseURL:baseURL];
 	}
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	[self.navigationController setToolbarHidden:YES animated:animated]; 
+	[self.navigationController setToolbarHidden:YES animated:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -88,7 +71,6 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear: animated];
-	[self.webView loadHTMLString:nil baseURL:nil];
 }
 
 

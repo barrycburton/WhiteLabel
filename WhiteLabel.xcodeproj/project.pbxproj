@@ -28,6 +28,7 @@
 		97479CB4135668B300A8553D /* template.html in Resources */ = {isa = PBXBuildFile; fileRef = 97479C63135555D400A8553D /* template.html */; };
 		97479CB5135668B300A8553D /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 97479C651355569D00A8553D /* style.css */; };
 		97479CB6135668B300A8553D /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97479C77135665C000A8553D /* Entitlements.plist */; };
+		97E331DE135E79710062A68B /* NSURL+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 97E331DD135E79710062A68B /* NSURL+MD5.m */; };
 		97F986641356780E00DA2B12 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 97F986631356780E00DA2B12 /* Default.png */; };
 		97F986661356784B00DA2B12 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97F986651356784B00DA2B12 /* Default@2x.png */; };
 /* End PBXBuildFile section */
@@ -74,6 +75,8 @@
 		9799962D125FC51B00B75182 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		9799962E125FC51B00B75182 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		9799962F125FC51B00B75182 /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		97E331DC135E79710062A68B /* NSURL+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+MD5.h"; sourceTree = "<group>"; };
+		97E331DD135E79710062A68B /* NSURL+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+MD5.m"; sourceTree = "<group>"; };
 		97F986631356780E00DA2B12 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		97F986651356784B00DA2B12 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,6 +101,7 @@
 				4CFDC236125FE0B600422E2D /* Controllers */,
 				4CFDC237125FE0BE00422E2D /* Models */,
 				4CFDC235125FE09300422E2D /* Views */,
+				97E331DB135E79360062A68B /* Categories */,
 				1D3623240D0F684500981E51 /* WhiteLabelAppDelegate.h */,
 				1D3623250D0F684500981E51 /* WhiteLabelAppDelegate.m */,
 			);
@@ -222,6 +226,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		97E331DB135E79360062A68B /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				97E331DC135E79710062A68B /* NSURL+MD5.h */,
+				97E331DD135E79710062A68B /* NSURL+MD5.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -302,6 +315,7 @@
 				97479CA91356688A00A8553D /* AlertViews.m in Sources */,
 				97479CAA1356688A00A8553D /* WhiteLabelAppDelegate.m in Sources */,
 				97479CAB1356688A00A8553D /* main.m in Sources */,
+				97E331DE135E79710062A68B /* NSURL+MD5.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,8 @@
 #import "Feed.h"
 #import "NetworkActivity.h"
 #import "AlertViews.h"
+#import "NSURL+MD5.h"
+#import <objc/runtime.h>
 
 @implementation Feed
 
@@ -18,9 +20,11 @@
 @synthesize lastUpdated;
 @synthesize isUpdating;
 
+static char entryKey;
+
 
 - (id)initWithParent:(RootViewController *)theParent {
-    if (self = [super init]) {
+    if ( (self = [super init]) ) {
 		self.list = [[[NSArray alloc] init] autorelease];
 		parsingEntry = NO;
 		self.feedURL = nil;
@@ -201,6 +205,17 @@
 			[[NSUserDefaults standardUserDefaults] setObject:self.list forKey:@"dataList"];
 			[[NSUserDefaults standardUserDefaults] setObject:self.lastUpdated forKey:@"lastUpdated"];
 			[[NSUserDefaults standardUserDefaults] synchronize];
+            
+            for ( NSDictionary *entry in self.list ) {
+                NSString *htmlString = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"template" ofType:@"html"] encoding:NSUTF8StringEncoding error:NULL];
+                htmlString = [NSString stringWithFormat:@"<html><body>%@</body></html>", [entry objectForKey:@"Body"]];
+                UIWebView *tempWebView = [[UIWebView alloc] init];
+                [tempWebView setDelegate:self];
+                objc_setAssociatedObject(tempWebView, &entryKey, entry, OBJC_ASSOCIATION_RETAIN);
+                [tempWebView loadHTMLString:htmlString baseURL:nil];
+            }
+            
+            
 		} else {
 			NSLog(@"About to Alert No Content");
 			AlertWithMessage(@"No content found.");
@@ -332,6 +347,44 @@
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
 	// also called when we abort parsing
 	NSLog(@"Parsing failed / aborted.");
+}
+
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    
+    NSOperationQueue *downloader = [[NSOperationQueue alloc] init];
+    int count = [[webView stringByEvaluatingJavaScriptFromString:@"document.images.length"] intValue];
+    for ( int i = 0; i < count; i++ ) {
+        NSURL *imageURL = [NSURL URLWithString:[webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.images[%d].src", i]]];
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"images"];
+        NSString *fileExtension = [[NSString stringWithFormat:@"/%@", [imageURL lastPathComponent]] pathExtension];
+        NSLog(@"File extension %@", fileExtension);
+        if ( !fileExtension ) {
+            fileExtension = @"jpg";
+        }
+        NSString *fileName = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", [imageURL hexadecimalMD5Value], fileExtension]];
+        NSString *relativeName = [@"images" stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", [imageURL hexadecimalMD5Value], fileExtension]];
+        [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.images[%d].src = \"%@\"", i, relativeName]];
+        
+        [downloader addOperationWithBlock:^(void) {
+            NSData* imageData = [NSData dataWithContentsOfURL:imageURL];
+            [imageData writeToFile:fileName atomically:NO];
+            NSLog(@"Wrote file: %@", fileName);
+        }];
+    }
+    NSString *newBody = [webView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML"];
+    NSLog(@"New Body: %@", newBody);
+    NSMutableDictionary *entry = (NSMutableDictionary *)objc_getAssociatedObject(webView, &entryKey);
+    [entry setObject:newBody forKey:@"Body"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.list forKey:@"dataList"];
+    [webView release];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    [webView release];
 }
 
 

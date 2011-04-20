@@ -22,7 +22,18 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
     // Override point for customization after application launch.
+    // TODO copy assets to documents directory
+    NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 
+    [[NSFileManager defaultManager] copyItemAtPath:[bundlePath stringByAppendingPathComponent:@"template.html"] 
+                                    toPath:[documentsPath stringByAppendingPathComponent:@"template.html"]
+                                    error:NULL];
+    [[NSFileManager defaultManager] copyItemAtPath:[bundlePath stringByAppendingPathComponent:@"style.css"] 
+                                    toPath:[documentsPath stringByAppendingPathComponent:@"style.css"]
+                                    error:NULL];
+    [[NSFileManager defaultManager] createDirectoryAtPath:[documentsPath stringByAppendingPathComponent:@"images"] withIntermediateDirectories:NO attributes:nil error:NULL];
+    
     // Add the navigation controller's view to the window and display.
     [window addSubview:navigationController.view];
     [window makeKeyAndVisible];

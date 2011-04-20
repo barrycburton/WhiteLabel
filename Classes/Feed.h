@@ -10,7 +10,7 @@
 
 @class RootViewController;
 
-@interface Feed : NSObject <NSXMLParserDelegate> {
+@interface Feed : NSObject <NSXMLParserDelegate, UIWebViewDelegate> {
 	NSArray *list;
 	NSURL *feedURL;
 	NSString *contentTitle;

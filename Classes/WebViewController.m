@@ -24,8 +24,6 @@
         self.webBody = [NSString stringWithFormat:htmlString, self.webTitle, self.webTitle, HTML];
 
         NSURL *baseURL = [NSURL fileURLWithPath:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] isDirectory:YES];
-        NSLog(@"Base: %@", [baseURL absoluteString]);
-        NSLog(@"Content: %@", HTML);
         if ( self.webView ) {
             [self.webView loadHTMLString:webBody baseURL:baseURL];
         }
@@ -70,6 +68,7 @@
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
+	[self setURL:nil andTitle:nil andHTML:nil];
 	[super viewDidDisappear: animated];
 }
 

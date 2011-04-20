@@ -361,7 +361,7 @@ static char entryKey;
         NSString *documentsDirectory = [paths objectAtIndex:0];
         documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"images"];
         NSString *fileExtension = [[NSString stringWithFormat:@"/%@", [imageURL lastPathComponent]] pathExtension];
-        NSLog(@"File extension %@", fileExtension);
+
         if ( !fileExtension ) {
             fileExtension = @"jpg";
         }
@@ -376,7 +376,7 @@ static char entryKey;
         }];
     }
     NSString *newBody = [webView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML"];
-    NSLog(@"New Body: %@", newBody);
+
     NSMutableDictionary *entry = (NSMutableDictionary *)objc_getAssociatedObject(webView, &entryKey);
     [entry setObject:newBody forKey:@"Body"];
     [[NSUserDefaults standardUserDefaults] setObject:self.list forKey:@"dataList"];
